@@ -1,0 +1,46 @@
+name: Feature request
+description: Propose a new skill, template, taxonomy, workflow, or governance improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: Describe the user, legal-research, HR, audit, or governance need.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Explain inputs, workflow, outputs, and expected review controls.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting source or rationale
+      description: Include official documentation, legal sources, standards, or operational evidence where relevant.
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk classification
+      options:
+        - Low — documentation or usability
+        - Medium — workflow or compatibility
+        - High — legal, privacy, security, or employment decision impact
+    validations:
+      required: true
+  - type: checkboxes
+    id: safeguards
+    attributes:
+      label: Safeguards considered
+      options:
+        - label: Human review requirements are identified.
+        - label: Privacy and confidential-data impacts are considered.
+        - label: Copyright and third-party licensing are considered.

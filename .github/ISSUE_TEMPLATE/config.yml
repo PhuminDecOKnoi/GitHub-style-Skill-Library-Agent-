@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security and privacy reports
+    url: https://github.com/PhuminDecOKnoi/GitHub-style-Skill-Library-Agent-/security
+    about: Do not disclose vulnerabilities, credentials, personal data, or confidential legal information in a public issue.
