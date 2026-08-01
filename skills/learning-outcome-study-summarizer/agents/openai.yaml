@@ -1,7 +1,7 @@
 interface:
   display_name: "Learning Outcome Study Summarizer"
-  short_description: "สรุปบทเรียนแบบยึดผลลัพธ์และตรวจสอบย้อนกลับ"
-  default_prompt: "Use $learning-outcome-study-summarizer to create a source-grounded exam review for the selected unit and offer optional visuals only when appropriate."
+  short_description: "สรุปบทเรียนและสร้างสื่อทบทวนแบบปรับระดับได้"
+  default_prompt: "Use $learning-outcome-study-summarizer to create a source-grounded exam review and, when requested, an adaptive-detail 16:9 visual with verified multi-image splitting and QA."
   icon_small: "./assets/icon.svg"
   icon_large: "./assets/icon.svg"
 policy:
