@@ -1,202 +1,208 @@
 # SKILL — Legal Deka Case Research
 
 ## Version
-2.0
+2.1
 
 ## Purpose
-ใช้สำหรับค้นหา ตรวจสอบ วิเคราะห์ เปรียบเทียบ และจัดการองค์ความรู้จากคำพิพากษาศาลฎีกาอย่างเป็นระบบ โดยยึดหลัก Internal Knowledge First วิเคราะห์ตัวบทก่อนฎีกา และห้ามแต่งเลขฎีกาหรือสาระคำพิพากษา
+ใช้สำหรับค้นหา ตรวจสอบ วิเคราะห์ เปรียบเทียบ และจัดการองค์ความรู้จากคำพิพากษาศาลฎีกาอย่างเป็นระบบ โดยให้ GitHub ทำหน้าที่เป็น Workflow Engine และให้ Google Drive / Internal Knowledge ทำหน้าที่เป็น Knowledge Base หลัก
+
+หลักบังคับ: Internal Knowledge First → STOU 41216 → ตัวบทกฎหมายฉบับทางการ → คำพิพากษาศาลฎีกา → แหล่งราชการและวิชาการ
 
 ## Core Principles
 
 1. อ่านไฟล์ที่ผู้ใช้ให้และความรู้ภายในก่อน
-2. ใช้ชุดวิชา STOU 41216 เป็นแกนความรู้เมื่อเกี่ยวข้อง
-3. วิเคราะห์ตัวบทกฎหมายก่อนคำพิพากษา
-4. ตรวจสอบเลขคำพิพากษา ปี ประเด็น และสาระจากแหล่งที่เชื่อถือได้
-5. แยกข้อเท็จจริง ประเด็นกฎหมาย เหตุผลของศาล ผลคำพิพากษา และความเห็นออกจากกัน
-6. ห้ามเติมข้อเท็จจริงที่ไม่มีในแหล่งข้อมูล
-7. ระบุข้อจำกัดเมื่อยังไม่พบคำพิพากษาฉบับเต็ม
-8. ตรวจสอบวันที่เกิดเหตุ กฎหมายที่ใช้บังคับ และอายุความเมื่อวิเคราะห์คดี
-9. ใช้ฎีกาเพื่ออธิบายหลักกฎหมาย ไม่ใช้แทนตัวบทกฎหมาย
+2. โหลด SKILL MASTER จาก Google Drive ก่อนเริ่มวิเคราะห์
+3. ใช้หน่วยเรียน STOU 41216 ที่เกี่ยวข้องเป็นแกนวิชาการ
+4. ค้นและแสดงตัวบทกฎหมายก่อนอ้างฎีกา
+5. ตรวจวันเกิดเหตุและกฎหมายที่ใช้บังคับในวันนั้น
+6. ตรวจเลขฎีกา ปี ประเด็น และสาระจากแหล่งที่เชื่อถือได้
+7. แยกข้อเท็จจริง ประเด็นกฎหมาย เหตุผลศาล ผลคำพิพากษา และความเห็น
+8. ห้ามแต่งข้อเท็จจริง มาตรา เลขฎีกา หรือคำวินิจฉัย
+9. ตรวจอายุความทุกครั้งเมื่อวิเคราะห์คดี
 10. Output เป็น Plain Text โดยค่าเริ่มต้น
+
+## Hybrid Legal Knowledge Architecture
+
+User Request
+↓
+GitHub Skill / Workflow
+↓
+Source Resolver
+├── Google Drive Master Skill
+├── STOU 41216 Unit 1–15
+├── Statutory Law Files
+├── Internal Deka / Case Files
+└── External Official Sources
+↓
+Legal Analysis
+↓
+Deka Knowledge Base Update
+
+## Source Registry
+
+ให้ใช้ไฟล์ `config/legal_source_registry.md` เป็นทะเบียนแหล่งความรู้กลาง โดยทะเบียนต้องระบุอย่างน้อย:
+
+- Source ID
+- Provider
+- File title / path / connector reference
+- Subject scope
+- Authority level
+- Currency / effective-date rule
+- Retrieval instruction
+- Fallback source
+
+ห้ามถือว่าข้อความใน GitHub เชื่อมกับ Google Drive โดยอัตโนมัติ ต้องเรียกค้นแหล่งข้อมูลผ่าน connector จริงทุกครั้ง
+
+## Mandatory Step 0 — Source Resolution
+
+ก่อน Search ฎีกา ต้องดำเนินการตามลำดับนี้:
+
+1. โหลด GitHub Skill ฉบับปัจจุบัน
+2. อ่าน `config/legal_source_registry.md`
+3. ค้นหาและอ่าน Google Drive Master Skill
+4. ระบุหน่วย STOU 41216 ที่เกี่ยวข้อง
+5. ค้นหาเนื้อหาจากหน่วยนั้น
+6. ค้นหาตัวบทกฎหมายฉบับเต็มจากแหล่งภายในหรือแหล่งราชการ
+7. ตรวจวันที่ใช้บังคับของกฎหมายเทียบวันเกิดเหตุ
+8. ตรวจแหล่งฎีกาภายในก่อนค้นภายนอก
+9. จัดทำ Source Availability Report
+10. จึงเริ่ม Deka Engine
+
+## Source Availability Report
+
+ต้องแสดงสถานะแหล่งข้อมูลก่อนวิเคราะห์:
+
+- GitHub Skill: Loaded / Not Loaded
+- Source Registry: Loaded / Not Loaded
+- Google Drive Master Skill: Loaded / Not Found
+- STOU Unit: Unit number + Found / Not Found
+- Statutory Text: Found / Not Found / Currency Unverified
+- Deka Source: Full Text / Digest / Secondary Citation / Not Found
+- External Verification: Required / Not Required / Completed
+- Analysis Status: Proceed / Limited Proceed / Stop
+
+## Stop Rules
+
+1. ไม่พบตัวบทกฎหมาย → ห้ามคัดหรือสร้างตัวบทจากความจำ
+2. ไม่พบหน่วย STOU ที่เกี่ยวข้อง → แจ้งข้อจำกัดและห้ามอ้างว่าเป็นคำอธิบายจาก STOU
+3. พบเพียงบทคัดย่อฎีกา → ใช้ได้เฉพาะสาระที่แหล่งรองรับและต้องระบุข้อจำกัด
+4. เลขฎีกาไม่ครบหรือขัดกัน → เก็บใน Research Queue และยังไม่เพิ่ม Knowledge Base
+5. กฎหมายปัจจุบันกับกฎหมายวันเกิดเหตุต่างกัน → ต้องแสดงทั้งสองสถานะและเลือกฉบับที่ใช้กับคดี
+6. หาก Source Resolution ไม่ผ่านจุดสำคัญ → หยุดสรุปความเห็นเด็ดขาดและระบุข้อมูลที่ต้องหาเพิ่ม
 
 ## Source Priority
 
 1. ไฟล์หรือภาพที่ผู้ใช้อัปโหลด
 2. Google Drive / Internal Knowledge
-3. เอกสาร STOU 41216
-4. ตัวบทกฎหมายฉบับทางการ
+3. STOU 41216 Unit 1–15
+4. ตัวบทกฎหมายฉบับทางการที่ใช้บังคับในวันเกิดเหตุ
 5. ศาลยุติธรรม / ศาลฎีกา
 6. เอกสารราชการ
 7. งานวิชาการหรือฐานข้อมูลรอง
 
 ## Deka Engine
 
+Source Resolution
+↓
 Search
-
 ↓
-
 Verify
-
 ↓
-
 Extract
-
 ↓
-
 Legal Mapping
-
 ↓
-
 Element Analysis
-
 ↓
-
 Compare
-
 ↓
-
 Trend Analysis
-
 ↓
-
 Case Map
-
 ↓
-
 Exam / Practice Notes
-
 ↓
-
 Knowledge Base Update
 
 ## Workflow
 
 ### Step 1 — Intake
-
 - ระบุเลขคำพิพากษาและปี
+- ระบุหัวข้อกฎหมายและข้อเท็จจริง
 - ตรวจว่าภาพหรือข้อความถูกตัดหรือไม่
-- ระบุหัวข้อกฎหมายหรือข้อเท็จจริงที่ต้องการค้นหา
-- หากเลขไม่ครบ ให้ขอข้อมูลเพิ่มก่อนสรุป
 
 ### Step 2 — Verification
-
 - ตรวจเลขคำพิพากษาและปี
-- ตรวจชื่อคู่ความหรือประเภทคดีถ้ามี
-- ตรวจฐานความผิดและมาตราที่เกี่ยวข้อง
-- ตรวจว่าพบฉบับเต็ม บทคัดย่อ หรือเพียงการอ้างต่อกัน
-- บันทึกแหล่งข้อมูลและระดับความน่าเชื่อถือ
+- ตรวจฐานความผิดและมาตรา
+- ระบุว่าเป็นฉบับเต็ม บทคัดย่อ หรือการอ้างต่อกัน
+- บันทึกแหล่งและระดับความน่าเชื่อถือ
 
 ### Step 3 — Extraction
-
-สกัดข้อมูลจากคำพิพากษาโดยแยก:
-
-- ข้อเท็จจริงที่ศาลรับฟัง
-- ข้อกล่าวอ้างที่ยังเป็นข้อโต้แย้ง
-- ประเด็นกฎหมาย
-- เหตุผลของศาล
-- ผลคำพิพากษา
-- ข้อยุติที่เป็นหลักกฎหมาย
+แยกข้อเท็จจริงที่ศาลรับฟัง ข้อโต้แย้ง ประเด็นกฎหมาย เหตุผลศาล ผลคำพิพากษา และหลักกฎหมาย
 
 ### Step 4 — Legal Mapping
-
-- ชื่อกฎหมาย
-- มาตรา วรรค และอนุมาตรา
-- องค์ประกอบภายนอก
-- องค์ประกอบภายใน
+- Related STOU Unit and topic
+- ชื่อกฎหมาย มาตรา วรรค และอนุมาตรา
+- องค์ประกอบภายนอกและภายใน
 - ความสัมพันธ์ระหว่างการกระทำกับผล
 - เหตุยกเว้นความผิดหรือโทษ
 - ตัวการ ผู้ใช้ ผู้สนับสนุน
 - กรรมเดียว หลายกรรม หรือบทเฉพาะ
-- อายุความและประเด็นวิธีพิจารณา
+- อายุความและวิธีพิจารณา
 
 ### Step 5 — Deka Analysis
-
-สำหรับแต่ละฎีกา ให้แสดง:
-
-1. เลขคำพิพากษา
-2. ปีคำพิพากษา
-3. ศาลหรือประเภทคดี
-4. หน่วย STOU ที่เกี่ยวข้อง
-5. มาตราที่เกี่ยวข้อง
-6. Keywords
-7. ข้อเท็จจริงสำคัญ
-8. ประเด็นวินิจฉัย
-9. เหตุผลของศาล
-10. ผลคำพิพากษา
-11. หลักกฎหมายที่วางไว้
-12. การนำไปใช้กับข้อเท็จจริงของผู้ใช้
-13. สถานะการใช้ในปัจจุบัน
-14. ข้อจำกัดของแหล่งข้อมูล
+สำหรับแต่ละฎีกาให้แสดง:
+1. เลขและปี
+2. สถานะการตรวจสอบ
+3. Related STOU Unit
+4. Relevant Law and statutory text source
+5. Facts
+6. Legal Issues
+7. Court Reasoning
+8. Holding
+9. Legal Principle
+10. Element Analysis
+11. Current Applicability
+12. Limitations
+13. References
 
 ### Step 6 — Comparative Analysis
-
-เมื่อมีหลายฎีกา ให้เปรียบเทียบ:
-
-- ข้อเท็จจริงร่วม
-- จุดแตกต่าง
-- มาตราที่ใช้ร่วมกัน
-- หลักกฎหมายร่วม
-- เงื่อนไขที่ทำให้ผลคดีต่างกัน
-- แนวคำพิพากษาที่เปลี่ยนแปลงหรือพัฒนา
-- ฎีกาหลัก ฎีกายืนยัน และฎีกาที่วางแนวต่าง
-- ความสอดคล้องกับตัวบทปัจจุบัน
+เปรียบเทียบข้อเท็จจริงร่วม จุดต่าง มาตรา หลักกฎหมาย เงื่อนไขผลคดี แนวเดิม แนวใหม่ และความสอดคล้องกับตัวบทปัจจุบัน
 
 ### Step 7 — Trend Analysis
-
-- แนวเดิม
-- แนวใหม่
-- จุดเปลี่ยนของแนวคำพิพากษา
-- เหตุผลที่ศาลเปลี่ยนแนว
-- ผลต่อการปรับบทและการใช้กฎหมาย
-- ข้อควรระวังเมื่ออ้างฎีกาเก่า
+แสดงแนวเดิม แนวใหม่ จุดเปลี่ยน เหตุผลที่เปลี่ยน ผลต่อการปรับบท และข้อควรระวังเมื่ออ้างฎีกาเก่า
 
 ### Step 8 — Case Map
-
-จัดกลุ่มฎีกาตาม:
-
-- กฎหมาย
-- ฐานความผิด
-- มาตรา
-- องค์ประกอบความผิด
-- ประเด็นเฉพาะ
-- ช่วงเวลา
-- แนวคำพิพากษา
+จัดกลุ่มตามกฎหมาย ฐานความผิด มาตรา องค์ประกอบ ประเด็น ช่วงเวลา และแนวคำพิพากษา
 
 ## Deka Research Queue
 
-ใช้สำหรับรายการฎีกาที่ยังอยู่ระหว่างค้นหาและตรวจสอบ ไม่ถือเป็นองค์ความรู้ที่ยืนยันแล้ว
+สถานะ:
+- Waiting for Research
+- Researching
+- Source Located
+- Verified
+- Compared
+- Added to Knowledge Base
 
-### Status
-
-- [ ] Waiting for Research
-- [ ] Researching
-- [ ] Source Located
-- [ ] Verified
-- [ ] Compared
-- [ ] Added to Knowledge Base
-
-### Queue Item Template
-
-- Deka Number:
-- Year:
-- Topic:
-- Requested By:
-- Source Provided:
-- Verification Status:
-- Notes:
+Queue Item:
+- Deka Number / Year
+- Topic
+- Related STOU Unit
+- Relevant Law
+- Source Provided
+- Verification Status
+- Missing Sources
+- Notes
 
 ## Deka Knowledge Base
-
-### Structure
-
-Deka Knowledge Base
 
 ├── Criminal Law
 │   ├── General Principles
 │   ├── Attempt
 │   ├── Participation
 │   ├── Defences
-│   ├── Multiplicity of Offences
+│   ├── Multiplicity
 │   ├── Offences against Life
 │   ├── Bodily Injury
 │   ├── Liberty
@@ -210,120 +216,81 @@ Deka Knowledge Base
 ├── Constitutional and Administrative Law
 └── Other Laws
 
-### Deka Record Template
+## Deka Record Template
 
 ## ฎีกาที่ [เลข/ปี]
-
-- Court / Case Type:
-- Related STOU Unit:
-- Relevant Law:
-- Section / Paragraph / Subsection:
-- Keywords:
 - Verification Status:
-- Source Type:
+- Source Availability Report:
+- Related STOU Unit / Topic:
+- Relevant Law / Section:
+- Statutory Text Source:
+- Keywords:
 
 ### Facts
-
-[ข้อเท็จจริงที่ศาลรับฟัง]
-
 ### Legal Issues
-
-[ประเด็นข้อกฎหมาย]
-
 ### Applicable Law
-
-[ตัวบทกฎหมายที่เกี่ยวข้อง]
-
 ### Court Reasoning
-
-[เหตุผลในการวินิจฉัย]
-
 ### Holding
-
-[ผลคำพิพากษา]
-
 ### Legal Principle
-
-[หลักกฎหมายที่สกัดได้]
-
 ### Element Analysis
-
 - Actus Reus:
 - Mens Rea:
 - Causation:
 - Defence:
 - Participation:
 - Multiplicity:
-
 ### Comparative Notes
-
-[เปรียบเทียบกับฎีกาอื่น]
-
 ### Current Applicability
-
-[สถานะและความเหมาะสมในการอ้างใช้ปัจจุบัน]
-
+### Limitation / Prescription
 ### Exam Point
-
-[ประเด็นสำหรับข้อสอบ]
-
 ### Practice Point
-
-[ประเด็นสำหรับการทำคดีหรือคำปรึกษา]
-
 ### Limitations
-
-[ข้อจำกัดของแหล่งข้อมูลและข้อเท็จจริง]
-
 ### References
-
-[แหล่งข้อมูล]
 
 ## Output Template
 
-หัวข้อ: วิเคราะห์คำพิพากษาศาลฎีกา
-
-1. สถานะการตรวจสอบ
-2. รายการฎีกา
-3. ข้อเท็จจริงสำคัญ
-4. ประเด็นกฎหมาย
-5. ตัวบทกฎหมาย
-6. เหตุผลของศาลฎีกา
-7. หลักกฎหมาย
-8. การเปรียบเทียบแนวคำพิพากษา
-9. แนวโน้มและจุดเปลี่ยน
-10. การประยุกต์ใช้กับคดีปัจจุบัน
-11. อายุความและวิธีพิจารณา
-12. ข้อจำกัดและพยานหลักฐานที่ต้องหาเพิ่ม
+1. Source Availability Report
+2. สถานะการตรวจสอบ
+3. ข้อเท็จจริงและ Timeline
+4. Related STOU Units
+5. ตัวบทกฎหมายฉบับที่ใช้บังคับ
+6. องค์ประกอบความผิด
+7. เหตุผลและผลคำพิพากษา
+8. หลักกฎหมาย
+9. Comparative / Trend Analysis
+10. Case Map
+11. การประยุกต์ใช้
+12. อายุความและวิธีพิจารณา
+13. ข้อจำกัดและหลักฐานที่ต้องหาเพิ่ม
 
 ## Quality Assurance Checklist
 
-- [ ] เลขฎีกาครบถ้วน
-- [ ] ปีคำพิพากษาถูกต้อง
-- [ ] พบแหล่งข้อมูลที่ตรวจสอบได้
-- [ ] ระบุว่าเป็นฉบับเต็มหรือบทคัดย่อ
-- [ ] ไม่แต่งข้อเท็จจริง
-- [ ] ไม่แต่งมาตรา
-- [ ] ไม่แต่งคำวินิจฉัย
-- [ ] แยกข้อเท็จจริงจากความเห็น
-- [ ] วิเคราะห์ตัวบทก่อนฎีกา
-- [ ] ตรวจองค์ประกอบความผิด
-- [ ] ตรวจแนวคำพิพากษาที่ต่างกัน
-- [ ] ตรวจอายุความเมื่อเกี่ยวข้อง
-- [ ] ระบุสถานะการใช้ในปัจจุบัน
-- [ ] ระบุข้อจำกัด
+- [ ] GitHub Skill loaded
+- [ ] Source Registry loaded
+- [ ] Google Drive Master Skill reviewed
+- [ ] Related STOU Unit located and cited
+- [ ] Official or verified statutory text located
+- [ ] Applicable-law date checked
+- [ ] Deka number and year verified
+- [ ] Full text / digest / secondary source status stated
+- [ ] Facts separated from opinion
+- [ ] No invented statute or holding
+- [ ] Elements analyzed
+- [ ] Conflicting Deka checked
+- [ ] Limitation checked
+- [ ] Current applicability stated
+- [ ] Limitations stated
 
 ## Change Log
 
-### v2.0
-- เปลี่ยน Case Set แบบผูกกับภาพผู้ใช้เป็นโครงสร้างทั่วไป
-- เพิ่ม Deka Research Queue
-- เพิ่ม Deka Knowledge Base
-- เพิ่ม Deka Record Template
-- เพิ่ม Deka Engine 10 ขั้นตอน
-- เพิ่ม Comparative Analysis, Trend Analysis และ Case Map
-- รองรับกฎหมายอาญา วิธีพิจารณาความอาญา แรงงาน แพ่ง รัฐธรรมนูญ ปกครอง และกฎหมายอื่น
+### v2.1
+- เพิ่ม Hybrid Legal Knowledge Architecture
+- เพิ่ม Source Registry
+- เพิ่ม Mandatory Step 0 — Source Resolution
+- เพิ่ม Source Availability Report
+- เพิ่ม Stop Rules
+- บังคับเชื่อม Google Drive Master Skill, STOU Units และตัวบทก่อน Deka Engine
+- เพิ่ม QA สำหรับการเชื่อมโยงแหล่งข้อมูลข้ามระบบ
 
-### v1.0
-- สร้าง SKILL สำหรับการค้นหาและวิเคราะห์ฎีกา
-- วาง workflow ตาม SKILL MASTER – Criminal Law AI v4.1
+### v2.0
+- เพิ่ม Deka Engine, Research Queue, Knowledge Base, Comparative Analysis และ Trend Analysis
