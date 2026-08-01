@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Labour Dika Agent Skill Library"
+message: "If you use this repository, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: "Decoknoi"
+    given-names: "Phumin"
+    alias: "PhuminDecOKnoi"
+repository-code: "https://github.com/PhuminDecOKnoi/GitHub-style-Skill-Library-Agent-"
+license: MIT
+version: "1.0.0"
+date-released: "2026-08-01"
+keywords:
+  - labour-law
+  - legal-research
+  - hr-compliance
+  - ai-agent
+  - knowledge-management
+  - supreme-court-precedent
