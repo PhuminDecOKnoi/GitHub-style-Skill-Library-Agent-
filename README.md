@@ -69,6 +69,8 @@ flowchart TD
 .
 ├── README.md
 ├── LICENSE
+├── CITATION.cff
+├── BRAND.md
 ├── SECURITY.md
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
@@ -120,6 +122,8 @@ Every material legal proposition should identify, where available:
 - human reviewer and review status.
 
 Do not present an inferred proposition as a direct judicial holding. Clearly distinguish source text, paraphrase, analytical inference, and recommendation.
+
+For repository-level academic or professional citation, use [CITATION.cff](CITATION.cff).
 
 ## Quality controls
 
@@ -185,11 +189,19 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## Governance documents
 
+- [Brand and Attribution Standard](BRAND.md)
+- [Citation Metadata](CITATION.cff)
 - [Security Policy](SECURITY.md)
 - [Contribution Guide](CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Support Policy](SUPPORT.md)
 - [Changelog](CHANGELOG.md)
+
+## Brand and attribution
+
+Original repository materials are maintained by **Phumin Decoknoi (`PhuminDecOKnoi`)**. The MIT License permits reuse subject to its terms, including retention of the copyright and permission notice in copies or substantial portions.
+
+Responsible reuse should identify material modifications, avoid false claims of authorship or endorsement, preserve legal-source traceability, and respect separate rights in third-party materials. See [BRAND.md](BRAND.md).
 
 ## Roadmap
 
@@ -209,4 +221,5 @@ Original repository materials are available under the [MIT License](LICENSE). Co
 
 ## Maintainer
 
-Maintained by [PhuminDecOKnoi](https://github.com/PhuminDecOKnoi).
+Maintained by **[Phumin Decoknoi (`PhuminDecOKnoi`)](https://github.com/PhuminDecOKnoi)**  
+AI • Labour Law • HR Compliance • Audit • Knowledge Management
