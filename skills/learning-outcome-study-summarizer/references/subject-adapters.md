@@ -4,7 +4,7 @@ Select only the adapter that matches the source. Combine adapters when a course 
 
 ## Law
 
-Organize by legal issue, governing law, section or clause, elements, conditions, exceptions, legal effects, application, and disputed distinctions. Preserve the official title and provision number exactly as shown. Separate the source's legal rule from commentary, cases, and inferred application. Do not claim current validity unless the source or verified current research supports it.
+Organize by legal issue, governing law, section or clause, elements, conditions, exceptions, legal effects, application, judicial decisions, and disputed distinctions. Preserve the official title, provision number, court, and decision number exactly as shown. For every relevant judgment appearing in the source, extract a short keyword or key phrase, necessary facts, holding or legal principle, connection to the current topic or provision, and a page or section reference. Separate the source's legal rule, the court's ruling, textbook commentary, and inferred application. Do not claim current validity unless the source or verified current research supports it.
 
 ## Business, management, HR, and audit
 

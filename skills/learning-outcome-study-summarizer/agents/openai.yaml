@@ -1,14 +1,13 @@
 interface:
-  display_name: Learning Outcome Study Summarizer
-  short_description: สรุปบทเรียนตามผลลัพธ์การเรียนรู้และกิจกรรม
-  default_prompt: Use $learning-outcome-study-summarizer to summarize the selected
-    lesson from its learning outcomes, subtopics, and activities.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
+  display_name: "Learning Outcome Study Summarizer"
+  short_description: "สรุปบทเรียนแบบยึดผลลัพธ์และตรวจสอบย้อนกลับ"
+  default_prompt: "Use $learning-outcome-study-summarizer to create a source-grounded exam review for the selected unit and offer optional visuals only when appropriate."
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
 policy:
   products:
-  - chatgpt
-  - codex
-  - api
-  - atlas
+  - "chatgpt"
+  - "codex"
+  - "api"
+  - "atlas"
   allow_implicit_invocation: true
