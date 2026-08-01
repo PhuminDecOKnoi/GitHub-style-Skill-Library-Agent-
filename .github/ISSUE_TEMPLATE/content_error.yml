@@ -1,0 +1,52 @@
+name: Legal or content correction
+description: Report an inaccurate citation, legal statement, translation, taxonomy, or documentation section
+title: "[Content]: "
+labels: ["documentation"]
+body:
+  - type: input
+    id: path
+    attributes:
+      label: Affected file and section
+      placeholder: templates/legal_memo_template.md — Evidence section
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current wording or issue
+      description: Quote only the minimum text needed to identify the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Supporting source
+      description: Provide the official source, judgment number, statute and section, publication, URL, and access date where available.
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Potential impact
+      options:
+        - Typographical or formatting only
+        - May affect interpretation
+        - May affect legal or compliance decision
+        - Security, privacy, or confidentiality risk
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I distinguished source text from my interpretation.
+          required: true
+        - label: I removed personal, confidential, and privileged information.
+          required: true
