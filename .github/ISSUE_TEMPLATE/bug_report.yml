@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a reproducible defect in a skill, template, workflow, or document
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secrets, personal data, confidential legal material, or security vulnerabilities.
+  - type: input
+    id: path
+    attributes:
+      label: Affected file or path
+      placeholder: skills/example.md
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem description
+      description: Explain the defect precisely.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open...
+        2. Run or review...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence or source
+      description: Provide a redacted log, source, judgment reference, statutory reference, or screenshot where relevant.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed secrets, personal data, and confidential information.
+          required: true
+        - label: This report is not a private security vulnerability.
+          required: true
