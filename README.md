@@ -146,6 +146,8 @@ The operating model uses four complementary control layers:
 
 These controls are supported by domain skills, templates, evidence records, governance documents, and reusable outputs.
 
+The repository also includes `skills/learning-outcome-study-summarizer/`, a reusable cross-subject study skill that aligns summaries to learning outcomes, source headings, activities, exercises, and answer keys while preserving source traceability.
+
 ## Repository structure
 
 ```text
@@ -164,6 +166,7 @@ These controls are supported by domain skills, templates, evidence records, gove
 ├── CLAUDE.md
 ├── skills/
 │   ├── github-repository-professional-standard/
+│   ├── learning-outcome-study-summarizer/
 │   └── legal-multi-domain-analysis/
 ├── legal-register/
 ├── taxonomy/

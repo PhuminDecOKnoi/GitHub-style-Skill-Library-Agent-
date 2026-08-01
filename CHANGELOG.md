@@ -8,6 +8,7 @@ The format is based on Keep a Changelog principles. The repository currently use
 
 ### Added
 
+- Added `skills/learning-outcome-study-summarizer/` with outcome-aligned summarization workflow, subject adapters, agent metadata, and icon asset.
 - Future skills, templates, governance controls, and validation tooling will be recorded here.
 
 ## [2026-08-01] - Professional governance baseline
