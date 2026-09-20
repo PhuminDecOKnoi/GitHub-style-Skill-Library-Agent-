@@ -9,6 +9,13 @@ The format is based on Keep a Changelog principles. The repository currently use
 ### Added
 
 - Added `skills/learning-outcome-study-summarizer/` with outcome-aligned summarization workflow, subject adapters, agent metadata, and icon asset.
+- Added Thai Bar / เนติบัณฑิตไทย Alignment Protocol as an integrated mode inside the existing legal master, legal mind-mapping, and legal mockup PNG workflows.
+- Added STOU-to-Thai-Bar alignment sequence: STOU course/unit → Thai Bar subject mapping → legal structure → current statutes → exam issues → verified case/deka anchor → exam-writing framework → checklist / next action.
+
+### Changed
+
+- Updated `skills/legal-multi-domain-analysis/SKILL.md` to version 1.1.0 with Thai Bar Alignment engine, legal mind-mapping layer, legal mockup PNG guidance, and standalone neti/bar avoidance rules.
+- Updated `skills/learning-outcome-study-summarizer/SKILL.md` to version 1.1.0 with Thai Bar / เนติฯ depth mode, visual Thai Bar Focus rules, and source discipline for STOU and official Thai Bar materials.
 - Future skills, templates, governance controls, and validation tooling will be recorded here.
 
 ## [2026-08-01] - Professional governance baseline
